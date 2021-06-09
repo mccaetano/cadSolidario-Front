@@ -1,0 +1,60 @@
+<div class="container">
+    <h1>Alterar Agendamento</h1>
+   
+    <a href="#" routerLink="/scheduler/index" class="btn btn-primary">Back</a>
+         
+    <form [formGroup]="form" (ngSubmit)="submit()">
+   
+        <div class="form-group">
+            <label for="eventDate">Data do Evento:</label>
+            <input
+                formControlName="eventDate"
+                id="eventDate"
+                type="text"
+                [(ngModel)]="scheduler.eventDate"
+                class="form-control">
+            <div *ngIf="f.eventDate.touched && f.eventDate.invalid" class="alert alert-danger">
+                <div *ngIf="f.eventDate.errors.required">Data do Evento é requerida</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="effectiveDate">Data De Comfirmação:</label>
+            <input
+                formControlName="effectiveDate"
+                id="effectiveDate"
+                type="text"
+                [(ngModel)]="scheduler.effectiveDate"
+                class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="status">Estado:</label>
+            <input
+                formControlName="status"
+                id="status"
+                type="text"
+                [(ngModel)]="scheduler.status"
+                class="form-control">
+            <div *ngIf="f.status.touched && f.status.invalid" class="alert alert-danger">
+                <div *ngIf="f.notes.errors.required">Estado é requerido.</div>
+            </div>
+        </div>
+   
+        <div class="form-group">
+            <label for="notes">Descrição</label>
+            <textarea
+                formControlName="notes"
+                id="notes"
+                type="text"
+                [(ngModel)]="scheduler.notes"
+                class="form-control">
+            </textarea>
+            <div *ngIf="f.notes.touched && f.notes.invalid" class="alert alert-danger">
+                <div *ngIf="f.notes.errors.required">Descrição é requiredo.</div>
+            </div>
+        </div>
+         
+        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Salvar</button>
+    </form>
+</div>

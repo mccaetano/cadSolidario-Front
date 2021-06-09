@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>Cadastro Solidário</h1>
+   
+    <a href="#" routerLink="/scheduler/create/" class="btn btn-success">Addicionar Agendamento</a>
+     
+    <table class="table table-bordered">
+      <tr>
+        <th>Data do Evento</th>
+        <th>Data Confirmada</th>
+        <th>Status</th>
+        <th>Descrição</th>
+        <th width="220px">#</th>
+      </tr>
+      <tr *ngFor="let scheduler of schedulers">
+        <td>{{ scheduler.id }}</td>
+        <td>{{ scheduler.eventDate }}</td>
+        <td>{{ scheduler.effectiveDate }}</td>
+        <td>{{ scheduler.status }}</td>
+        <td>{{ scheduler.notes }}</td>
+        <td>
+          <a href="#" [routerLink]="['/post/', scheduler.id, 'view']" class="btn btn-info">View</a>
+          <a href="#" [routerLink]="['/post/', scheduler.id, 'edit']" class="btn btn-primary">Edit</a>
+        </td>
+      </tr>
+    </table>
+ </div>
+ 
