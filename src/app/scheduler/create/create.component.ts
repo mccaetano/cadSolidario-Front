@@ -1,6 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SchedulerService } from '../scheduler.service';
 
@@ -11,27 +11,23 @@ import { SchedulerService } from '../scheduler.service';
 })
 export class CreateComponent implements OnInit {
 
-  form: FormGroup = new FormGroup({
-    eventDate: new FormControl('', [Validators.required]),
-    effectiveDate: new FormControl('', null),
-    status: new FormControl('', [Validators.required]),
-    notes: new FormControl('', [Validators.required])
-  });
+  form: FormGroup;
 
   constructor(
     public schedulerService: SchedulerService,
-    private router: Router) { }
+    private formBuilder: FormBuilder,
+    private router: Router) { 
+      this.form = this.formBuilder.group({
+        eventDate: ['', Validators.required],
+        effectiveDate: [''],
+        status: ['', Validators.required],
+        notes: ['', Validators.required]
+      })
+    }
 
-  ngOnInit(): void {
-    this.form = new FormGroup({
-      eventDate: new FormControl('', [Validators.required]),
-      effectiveDate: new FormControl('', null),
-      status: new FormControl('', [Validators.required]),
-      notes: new FormControl('', [Validators.required])
-    });
-  }
+  ngOnInit(): void { }
 
-  get f(){
+  get f() {
     return this.form.controls;
   }
 

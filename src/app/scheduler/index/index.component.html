@@ -1,27 +1,41 @@
+<div class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/scheduler/index">Cadastro Solidário</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/scheduler/index">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/scheduler/create">Adicionar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <div class="container">
-    <h1>Cadastro Solidário</h1>
-   
-    <a href="#" routerLink="/scheduler/create/" class="btn btn-success">Addicionar Agendamento</a>
-     
-    <table class="table table-bordered">
-      <tr>
-        <th>Data do Evento</th>
-        <th>Data Confirmada</th>
-        <th>Status</th>
-        <th>Descrição</th>
-        <th width="220px">#</th>
-      </tr>
-      <tr *ngFor="let scheduler of schedulers">
-        <td>{{ scheduler.id }}</td>
-        <td>{{ scheduler.eventDate }}</td>
-        <td>{{ scheduler.effectiveDate }}</td>
-        <td>{{ scheduler.status }}</td>
-        <td>{{ scheduler.notes }}</td>
-        <td>
-          <a href="#" [routerLink]="['/post/', scheduler.id, 'view']" class="btn btn-info">View</a>
-          <a href="#" [routerLink]="['/post/', scheduler.id, 'edit']" class="btn btn-primary">Edit</a>
-        </td>
-      </tr>
-    </table>
- </div>
- 
+  <table class="table table-bordered">
+    <tr>
+      <th>Data do Evento</th>
+      <th>Data Confirmada</th>
+      <th>Status</th>
+      <th>Descrição</th>
+      <th width="220px">#</th>
+    </tr>
+    <tr *ngFor="let scheduler of schedulers">
+      <td>{{ scheduler.id }}</td>
+      <td>{{ scheduler.eventDate }}</td>
+      <td>{{ scheduler.effectiveDate }}</td>
+      <td>{{ scheduler.status }}</td>
+      <td>{{ scheduler.notes }}</td>
+      <td>
+        <a href="#" [routerLink]="['/post/', scheduler.id, 'view']" class="btn btn-info">View</a>
+        <a href="#" [routerLink]="['/post/', scheduler.id, 'edit']" class="btn btn-primary">Edit</a>
+      </td>
+    </tr>
+  </table>
+</div>

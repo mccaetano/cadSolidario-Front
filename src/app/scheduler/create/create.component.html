@@ -11,9 +11,10 @@
                 formControlName="eventDate"
                 id="eventDate"
                 type="text"
+                required
                 class="form-control">
             <div *ngIf="f.eventDate.touched && f.eventDate.invalid" class="alert alert-danger">
-                <div *ngIf="f.eventDate.errors.required">Data do Evento é requerida.</div>
+                <div>Data do Evento é requerida.</div>
             </div>
         </div>
 
@@ -32,9 +33,10 @@
                 formControlName="status"
                 id="status"
                 type="text"
+                required
                 class="form-control">
                 <div *ngIf="f.status.touched && f.status.invalid" class="alert alert-danger">
-                    <div *ngIf="f.status.errors.required">Estado é requerido.</div>
+                    <div>Estado é requerido.</div>
                 </div>
         </div>
    
@@ -44,10 +46,11 @@
                 formControlName="notes"
                 id="notes"
                 type="text"
+                required
                 class="form-control">
             </textarea>
             <div *ngIf="f.notes.touched && f.notes.invalid" class="alert alert-danger">
-                <div *ngIf="f.notes.errors.required">Descrição é requiredo.</div>
+                <div>Descrição é requiredo.</div>
             </div>
         </div>
    

@@ -11,13 +11,21 @@ import { SchedulerService } from '../scheduler.service';
 export class ViewComponent implements OnInit {
 
   id: number = 0;
-  scheduler: Scheduler | undefined;
+  scheduler: Scheduler;
 
   constructor(
     public schedulerService: SchedulerService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) { 
+    this.scheduler = {
+      id: 0,
+      eventDate: new Date,
+      effectiveDate: new Date,
+      status: "",
+      notes: ""
+    };
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];

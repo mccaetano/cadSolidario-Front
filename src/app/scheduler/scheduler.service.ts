@@ -9,7 +9,7 @@ import { catchError } from "rxjs/operators";
 })
 export class SchedulerService {
 
-  private apiURL = "https://fathomless-oasis-19706.herokuapp.com/api";
+  private apiURL = "/api";
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -21,7 +21,8 @@ export class SchedulerService {
 
   getAll(startEventDate: Date, endEventDate: Date, status: string): Observable<Scheduler[]> {
     return this.httpClient.get<Scheduler[]>(this.apiURL + '/calendar?startEventDate='+ 
-      startEventDate + "&endEventDate=" + endEventDate + "&status=" + status)
+      startEventDate.toISOString().split('T')[0] + "&endEventDate=" + 
+      endEventDate.toISOString().split('T')[0] + "&status=" + status)
     .pipe(
       catchError(this.errorHandler)
     )
