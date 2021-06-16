@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit {
   constructor(public schedulerService: SchedulerService) {  }
 
   ngOnInit(): void {
-    this.getByFilter(new Date, new Date, "");
+    this.getByFilter(new Date("1900-01-01"), new Date("1900-01-01"), "");
   }
 
   getByFilter(startEventDate: Date, endEventDate: Date, status: string): void {

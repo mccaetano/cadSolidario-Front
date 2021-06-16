@@ -4,10 +4,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { SchedulerService } from '../scheduler.service';
 
+
+
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  styleUrls: ['./create.component.css', '../../../assets/css/datepicker.css']
 })
 export class CreateComponent implements OnInit {
 

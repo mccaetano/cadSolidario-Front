@@ -29,6 +29,9 @@ export class SchedulerService {
   }
 
   create(scheduler: Scheduler): Observable<Scheduler> {
+    if (scheduler.effectiveDate == null) { scheduler.effectiveDate = new Date("1900-01-01")}
+    if (scheduler.eventDate == null) { scheduler.eventDate = new Date("1900-01-01")}
+    
     return this.httpClient.post<Scheduler>(this.apiURL + '/calendar', JSON.stringify(scheduler), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
