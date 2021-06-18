@@ -29,6 +29,7 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/navbar-top.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -104,6 +105,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/navbar-top.css",
               "src/styles.css"
             ],
             "scripts": [
