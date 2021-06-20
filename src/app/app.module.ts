@@ -7,6 +7,11 @@ import { AppComponent } from './app.component';
 
 import { SchedulerModule } from "./scheduler/scheduler.module";
 
+import { FormsModule } from "@angular/forms";
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -15,7 +20,11 @@ import { SchedulerModule } from "./scheduler/scheduler.module";
     BrowserModule,
     AppRoutingModule,
     SchedulerModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    DatepickerModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

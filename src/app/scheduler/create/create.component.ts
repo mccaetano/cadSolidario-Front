@@ -1,10 +1,8 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SchedulerService } from '../scheduler.service';
-
-
 
 @Component({
   selector: 'app-create',
@@ -14,6 +12,8 @@ import { SchedulerService } from '../scheduler.service';
 export class CreateComponent implements OnInit {
 
   form: FormGroup;
+
+  bsDate: Date = new Date();
 
   constructor(
     public schedulerService: SchedulerService,
@@ -27,7 +27,9 @@ export class CreateComponent implements OnInit {
       })
     }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+  }
+
 
   get f() {
     return this.form.controls;
