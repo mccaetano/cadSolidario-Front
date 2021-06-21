@@ -2,7 +2,10 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Scheduler } from 'rxjs';
 import { SchedulerService } from '../scheduler.service';
+import { StatusListService } from '../status-list.service';
+import { StatusList } from '../statusList';
 
 @Component({
   selector: 'app-create',
@@ -15,8 +18,12 @@ export class CreateComponent implements OnInit {
 
   bsDate: Date = new Date();
 
+  statusList: StatusList[] = [];
+
+
   constructor(
     public schedulerService: SchedulerService,
+    public statusListService: StatusListService,
     private formBuilder: FormBuilder,
     private router: Router) { 
       this.form = this.formBuilder.group({
@@ -27,7 +34,10 @@ export class CreateComponent implements OnInit {
       })
     }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    this.statusListService.getAll().subscribe((data: StatusList[]) => {
+      this.statusList = data;
+    }); 
   }
 
 
