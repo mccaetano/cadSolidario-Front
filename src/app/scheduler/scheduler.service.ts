@@ -19,10 +19,10 @@ export class SchedulerService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(startEventDate: Date, endEventDate: Date, status: string): Observable<Scheduler[]> {
+  getAll(startEventDate: Date, endEventDate: Date, status: string, page: number): Observable<Scheduler[]> {
     return this.httpClient.get<Scheduler[]>(this.apiURL + '/calendar?startEventDate='+ 
       startEventDate.toISOString().split('T')[0] + "&endEventDate=" + 
-      endEventDate.toISOString().split('T')[0] + "&status=" + status)
+      endEventDate.toISOString().split('T')[0] + "&status=" + status+ "&limit=20&skip=" + page)
     .pipe(
       catchError(this.errorHandler)
     )

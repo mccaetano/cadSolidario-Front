@@ -1,31 +1,39 @@
-<div class="container">
-    <h1>Agendamento</h1>
-   
-    <a href="#" routerLink="/scheduler/index" class="btn btn-primary">Voltar</a>
-    
-    <div>
-        <strong>ID:</strong>
-        <p>{{ scheduler.id }}</p>
+<div class="row">
+    <div class="col">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/scheduler/index/1">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Adicionar Agendamento</li>
+            </ol>
+        </nav>
     </div>
-    
-    <div>
-        <strong>Data do Evento:</strong>
-        <p>{{ scheduler.eventDate }}</p>
+
+    <div class="row">
+        <div class="col">
+            <div>
+                <strong>ID:</strong>
+                <p>{{ scheduler.id }}</p>
+            </div>
+
+            <div>
+                <strong>Data do Evento:</strong>
+                <p>{{ scheduler.eventDate }}</p>
+            </div>
+
+            <div>
+                <strong>Confirmação do Evento:</strong>
+                <p>{{ scheduler.effectiveDate }}</p>
+            </div>
+
+            <div>
+                <strong>Estado:</strong>
+                <p>{{ scheduler.status.description }}</p>
+            </div>
+
+            <div>
+                <strong>Confirmação do Evento:</strong>
+                <p>{{ scheduler.notes }}</p>
+            </div>
+        </div>
     </div>
-    
-    <div>
-        <strong>Confirmação do Evento:</strong>
-        <p>{{ scheduler.effectiveDate }}</p>
-    </div>
-    
-    <div>
-        <strong>Estado:</strong>
-        <p>{{ scheduler.status }}</p>
-    </div>
-    
-    <div>
-        <strong>Confirmação do Evento:</strong>
-        <p>{{ scheduler.notes }}</p>
-    </div>
-    
 </div>

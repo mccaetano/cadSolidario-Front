@@ -1,7 +1,7 @@
 {
   "/api/*": {
-    "target": "https://fathomless-oasis-19706.herokuapp.com",
-    "secure": true,
+    "target": "http://localhost:5000",
+    "secure": false,
     "logLevel": "debug"
 }
 }

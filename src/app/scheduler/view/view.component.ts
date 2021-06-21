@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Scheduler } from '../scheduler';
 import { SchedulerService } from '../scheduler.service';
-
+import { StatusList } from "../statusList";
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -22,7 +22,7 @@ export class ViewComponent implements OnInit {
       id: 0,
       eventDate: new Date,
       effectiveDate: new Date,
-      status: "",
+      status: { code: "", description: ""},
       notes: ""
     };
   }

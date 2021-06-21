@@ -25,7 +25,7 @@ export class EditComponent implements OnInit {
       id: 0,
       eventDate: new Date,
       effectiveDate: new Date,
-      status: "",
+      status: { code: "", description: ""},
       notes: ""
     }
     this.form = this.formBuilder.group({
