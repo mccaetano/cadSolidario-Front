@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/scheduler/index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Beneficiário</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <div class="submit-form bg-light p-5 rounded">
+          <div class="form-group">
+            <label for="nameSearch">Name:</label>
+            <input id="nameSearch" type="text" class="form-control" [(ngModel)]="nameSearch">
+          </div>
+          <button class="btn btn-primary" (click)="getByFilter()">Buscar</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col" width="220px">#</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let recipient of recipients">
+              <td>{{ recipient.name }}</td>
+              <td>
+                <button  class="btn btn-info"  (click)="getById(recipient.id)">View</button>
+                <a href="#" [routerLink]="['/scheduler/', recipient.id, 'edit']" class="btn btn-primary">Edit</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="name">Data do Evento:</label>
+        <input
+            formControlName="id"
+            id="id"
+            type="text"
+            required
+            [(ngModel)]="recipient.id"
+            class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="name">Data do Evento:</label>
+        <input
+            formControlName="name"
+            id="name"
+            type="text"
+            required
+            [(ngModel)]="recipient.name"
+            class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="birth-date">Data do Evento:</label>
+        <input
+            formControlName="birth-date"
+            id="birth-date"
+            type="text"
+            required
+            [(ngModel)]="recipient.birthDate"
+            class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="work">Data do Evento:</label>
+        <input
+            formControlName="work"
+            id="v"
+            type="text"
+            required
+            [(ngModel)]="recipient.work"
+            class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="phone">Data do Evento:</label>
+        <input
+            formControlName="phone"
+            id="phone"
+            type="text"
+            required
+            [(ngModel)]="recipient.contacts.phone"
+            class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="cel-phone">Data do Evento:</label>
+        <input
+            formControlName="cel-phone"
+            id="cel-phone"
+            type="text"
+            required
+            [(ngModel)]="recipient.contacts.cel-phone"
+            class="form-control">
+      </div>
+      <button class="btn btn-info" type="submit">Salvar</button>
+    </form>
+  </div>
+</div>

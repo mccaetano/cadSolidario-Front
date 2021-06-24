@@ -11,6 +11,7 @@ import { FormsModule } from "@angular/forms";
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { RecipientModule } from './recipient/recipient.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     BrowserModule,
     AppRoutingModule,
     SchedulerModule,
+    RecipientModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
