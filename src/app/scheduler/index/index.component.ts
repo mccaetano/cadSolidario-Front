@@ -11,54 +11,52 @@ import { StatusList } from '../statusList';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  startEventDate='';
-  endEventDate='';
-  status='';
-  page=1;
+  eventDateSearch='';
+  nameSearch='';
+  currentPage=1;
   schedulers: Scheduler[] = [];
-  statusList: StatusList[] = [];
+  eventDates: Scheduler[] = [];
 
-  constructor(public schedulerService: SchedulerService, 
-    public statusListService: StatusListService, private route: ActivatedRoute) {  }
+  constructor(public schedulerService: SchedulerService, private route: ActivatedRoute) {  }
 
   ngOnInit(): void {
-    this.page = Number(this.route.snapshot.params['page']);
-    this.getByFilter();
-    this.statusListService.getAll().subscribe((data: StatusList[]) => {
-      this.statusList = data;
+    this.schedulerService.getEventDates().subscribe((data: Scheduler[]) => {
+      this.eventDates = data;
+      if (data.length > 0) {
+        this.eventDateSearch = data[0].eventDate.toString();
+      }
+      this.getByFilter();
     });
   }
 
   getByFilter(): void {
-    var startEventDate: Date = new Date('1900-01-01');
-    if (this.startEventDate != '' && this.startEventDate != null) {
-      startEventDate = new Date(this.startEventDate);
+    console.log("eventDateSearch: " + this.eventDateSearch);
+    var eventDate: Date = new Date('1900-01-01');
+    if (this.eventDateSearch != '' && this.eventDateSearch != null) {
+      eventDate = new Date(this.eventDateSearch);
     }
-    var endEventDate: Date = new Date('1900-01-01'); 
-    if (this.endEventDate != '' && this.endEventDate != null) {
-      endEventDate = new Date(this.endEventDate);
-    }
-    if (this.page <= 0) {
-      this.page = 1;
-    }
-    var status: string = this.status;
-    this.schedulerService.getAll(startEventDate, endEventDate, status, this.page).subscribe(
+    if (this.currentPage <= 0) {
+      this.currentPage = 1;
+    }    
+    this.schedulerService.getAll(eventDate, this.nameSearch, this.currentPage).subscribe(
       (data: Scheduler[]) => {
         this.schedulers = data;
         console.log("load data is sucesss");
       }
-    )
+    );
   }
 
   changePage(pg: string): void {
     if (pg == "m") { 
-      if (this.page >= 1) {
-        this.page -= this.page;
+      if (this.currentPage > 1) {
+        this.currentPage -= this.currentPage;
+      } else {
+        this.currentPage = 1;
       }
     } else {
       if (pg == "p") {
         if (this.schedulers.length > 0) {
-          this.page += this.page;
+          this.currentPage += this.currentPage;
         }
       }
     }

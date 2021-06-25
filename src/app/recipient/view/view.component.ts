@@ -11,8 +11,20 @@ import { RecipientService } from '../recipient.service';
 export class ViewComponent implements OnInit {
 
   nameSearch: string = '';
-  recipients: Recipient[]=[];
-  recipient: Recipient = {id: 0, name: "", birthDate: ""};
+  recipients: Recipient[] = [];
+  recipient: Recipient = {
+    id: 0, name: "", birthDate: "", address: "", work: "", documents: { rg: "", cpf: "", cpts: "", pis: "" },
+    contacts: { phone: "", celPhone: "" }, dependents: [{ name: "", document: "" }], retiree: false,
+    rentPay: false,
+    working: 0,
+    homePeaples: 0,
+    milks: 0,
+    babys: 0,
+    boys: 0,
+    girls: 0,
+    helpFamily: false,
+    active: false
+  };
   form: FormGroup;
 
   constructor(public recipientService: RecipientService, private formBuilder: FormBuilder) {
@@ -21,7 +33,7 @@ export class ViewComponent implements OnInit {
       name: [''],
       birthDate: ['']
     });
-   }
+  }
 
   ngOnInit(): void {
     this.getByFilter();
@@ -44,6 +56,6 @@ export class ViewComponent implements OnInit {
     );
   }
 
-  submit(){}
+  submit() { }
 
 }

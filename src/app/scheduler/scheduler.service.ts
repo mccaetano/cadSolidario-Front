@@ -19,27 +19,25 @@ export class SchedulerService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(startEventDate: Date, endEventDate: Date, status: string, page: number): Observable<Scheduler[]> {
-    return this.httpClient.get<Scheduler[]>(this.apiURL + '/calendar?startEventDate='+ 
-      startEventDate.toISOString().split('T')[0] + "&endEventDate=" + 
-      endEventDate.toISOString().split('T')[0] + "&status=" + status+ "&limit=20&skip=" + page)
+  getAll(eventDate: Date, name: string, page: number): Observable<Scheduler[]> {
+    return this.httpClient.get<Scheduler[]>(this.apiURL + '/calendar?eventDate='+ 
+      eventDate.toISOString().split('T')[0] + "&name=" + name + "&limit=20&skip=" + page)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
+  getEventDates(): Observable<Scheduler[]> {
+    return this.httpClient.get<Scheduler[]>(this.apiURL + '/calendar/event-dates')
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
   create(scheduler: Scheduler): Observable<Scheduler> {
-    if (scheduler.effectiveDate == null) { scheduler.effectiveDate = new Date("1900-01-01")}
     if (scheduler.eventDate == null) { scheduler.eventDate = new Date("1900-01-01")}
     
     return this.httpClient.post<Scheduler>(this.apiURL + '/calendar', JSON.stringify(scheduler), this.httpOptions)
-    .pipe(
-      catchError(this.errorHandler)
-    )
-  }  
-    
-  find(id: number): Observable<Scheduler> {
-    return this.httpClient.get<Scheduler>(this.apiURL + '/calendar/' + id)
     .pipe(
       catchError(this.errorHandler)
     )

@@ -11,23 +11,17 @@
   <div class="col">
     <div class="submit-form bg-light p-5 rounded">      
       <div class="form-group">
-          <label for="startEventDate">Evento Inicio:</label>
-          <input id="startEventDate" type="text" 
-            class="form-control" [(ngModel)]="startEventDate"> 
-      </div>
-      <div class="form-group">
-        <label for="endEventDate">Evento Inicio:</label>
-        <input id="endEventDate" type="text" 
-          class="form-control"  [(ngModel)]="endEventDate">
-      </div>
-      <div class="form-group">
-        <label for="status">Status:</label>
-        <select id="status" class="form-control"  [(ngModel)]="status">
-          <option disabled>Status</option>
-          <option value="">Selecione</option>
-          <option *ngFor="let statusOp of statusList" value="{{statusOp.code}}">{{statusOp.description}}</option>
+        <label for="status">Evento:</label>
+        <select id="status" class="form-control"  [(ngModel)]="eventDateSearch">
+          <option disabled>Evento</option>
+         <option *ngFor="let event of eventDates">{{event.eventDate}}</option>
         </select>
       </div>
+      <div class="form-group">
+        <label for="nomeSearch">Nome:</label>
+        <input id="nomeSearch" type="text" 
+          class="form-control" [(ngModel)]="nameSearch"> 
+      </div>    
       <button class="btn btn-primary" (click)="getByFilter()">Buscar</button>
     </div>
   </div>
@@ -37,19 +31,23 @@
     <table class="table">
       <thead>
         <tr>          
-          <th scope="col">Data do Evento</th>
-          <th scope="col">Data Confirmada</th>
+          <th scope="col">Nome</th>
+          <th scope="col">CPF</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Celular</th>
+          <th scope="col">Qtde.Leite</th>
           <th scope="col">Status</th>
-          <th scope="col">Descrição</th>
           <th scope="col" width="220px">#</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let scheduler of schedulers">
-          <td>{{ scheduler.eventDate }}</td>
-          <td>{{ scheduler.effectiveDate }}</td>
+          <td>{{ scheduler.name }}</td>
+          <td>{{ scheduler.documents.cpf }}</td>
+          <td>{{ scheduler.contacts.phone }}</td>
+          <td>{{ scheduler.contacts.celPhone }}</td>
+          <td>{{ scheduler.milks }}</td>
           <td>{{ scheduler.status.description }}</td>
-          <td>{{ scheduler.notes }}</td>
           <td>
             <a href="#" [routerLink]="['/scheduler/', scheduler.id, 'view']" class="btn btn-info">View</a>
             <a href="#" [routerLink]="['/scheduler/', scheduler.id, 'edit']" class="btn btn-primary">Edit</a>
@@ -59,10 +57,10 @@
     </table>
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#" [routerLink]="['/scheduler/index/', (page - 1)]" (click)="changePage('m')">Anterior</a></li>
-        <li class="page-item  active"  aria-current="page"><a class="page-link" href="#" [routerLink]="['/scheduler/index/', (page)]" (click)="changePage('n')">{{page}}</a></li>
-        <li class="page-item"><a class="page-link" href="#" [routerLink]="['/scheduler/index/', (page + 1)]" (click)="changePage('p')">{{page + 1}}</a></li>
-        <li class="page-item"><a class="page-link" href="#" [routerLink]="['/scheduler/index/', (page + 1)]" (click)="changePage('p')">Próximo</a></li>
+        <li class="page-item"><a class="page-link" href="#" [routerLink]="['/scheduler']" (click)="changePage('m')">Anterior</a></li>
+        <li class="page-item  active"  aria-current="page"><a class="page-link" href="#" [routerLink]="['/scheduler']" (click)="changePage('n')">{{currentPage}}</a></li>
+        <li class="page-item"><a class="page-link" href="#" [routerLink]="['/scheduler']" (click)="changePage('p')">{{currentPage + 1}}</a></li>
+        <li class="page-item"><a class="page-link" href="#" [routerLink]="['/scheduler']" (click)="changePage('p')">Próximo</a></li>
       </ul>
     </nav>
   </div>

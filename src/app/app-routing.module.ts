@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'scheduler/index', pathMatch: 'full' },
+  { path: '', redirectTo: 'scheduler', pathMatch: 'full' },
 ];
 
 @NgModule({
