@@ -6,17 +6,25 @@ import { IndexComponent } from './index/index.component';
 import { CreateComponent } from './create/create.component';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { UpdateComponent } from './update/update.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     IndexComponent,
-    CreateComponent
+    CreateComponent,
+    UpdateComponent
   ],
   imports: [
     CommonModule,
     SchedulerRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ]
 })
 export class SchedulerModule { }

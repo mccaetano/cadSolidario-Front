@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Scheduler } from '../scheduler';
 import { SchedulerService } from '../scheduler.service';
-import { StatusListService } from '../status-list.service';
-import { StatusList } from '../statusList';
+import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { CreateComponent } from '../create/create.component';
+import { UpdateComponent } from '../update/update.component';
+
 
 @Component({
   selector: 'app-index',
@@ -11,19 +13,23 @@ import { StatusList } from '../statusList';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  eventDateSearch='';
+  eventDateSearch?='';
   nameSearch='';
   currentPage=1;
   schedulers: Scheduler[] = [];
   eventDates: Scheduler[] = [];
+  modalRef?: BsModalRef
 
-  constructor(public schedulerService: SchedulerService, private route: ActivatedRoute) {  }
+  constructor(
+    public schedulerService: SchedulerService,
+    private route: ActivatedRoute,
+    public modalService: BsModalService) {  }
 
   ngOnInit(): void {
     this.schedulerService.getEventDates().subscribe((data: Scheduler[]) => {
       this.eventDates = data;
       if (data.length > 0) {
-        this.eventDateSearch = data[0].eventDate.toString();
+        this.eventDateSearch = data[0]?.eventDate?.toString() ;
       }
       this.getByFilter();
     });
@@ -37,7 +43,7 @@ export class IndexComponent implements OnInit {
     }
     if (this.currentPage <= 0) {
       this.currentPage = 1;
-    }    
+    }
     this.schedulerService.getAll(eventDate, this.nameSearch, this.currentPage).subscribe(
       (data: Scheduler[]) => {
         this.schedulers = data;
@@ -47,7 +53,7 @@ export class IndexComponent implements OnInit {
   }
 
   changePage(pg: string): void {
-    if (pg == "m") { 
+    if (pg == "m") {
       if (this.currentPage > 1) {
         this.currentPage -= this.currentPage;
       } else {
@@ -63,4 +69,15 @@ export class IndexComponent implements OnInit {
     this.getByFilter();
   }
 
+  openModalCreate() {
+    const initialState = {
+    };
+    this.modalRef = this.modalService.show(CreateComponent, initialState);
+  }
+
+  openModalUpdate() {
+    const initialState = {
+    };
+    this.modalRef = this.modalService.show(UpdateComponent, initialState);
+  }
 }

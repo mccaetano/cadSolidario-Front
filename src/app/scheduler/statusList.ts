@@ -1,5 +1,5 @@
 
 export interface StatusList {
-  code: String,
-  description: String
+  id?: String,
+  description?: String
 }

@@ -5,13 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RecipientModule } from './recipient/recipient.module';
 import { SchedulerModule } from "./scheduler/scheduler.module";
 
-import { FormsModule } from "@angular/forms";
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { RecipientModule } from './recipient/recipient.module';
 
 @NgModule({
   declarations: [
@@ -25,8 +23,7 @@ import { RecipientModule } from './recipient/recipient.module';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    DatepickerModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

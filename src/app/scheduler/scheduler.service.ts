@@ -20,7 +20,7 @@ export class SchedulerService {
   constructor(private httpClient: HttpClient) { }
 
   getAll(eventDate: Date, name: string, page: number): Observable<Scheduler[]> {
-    return this.httpClient.get<Scheduler[]>(this.apiURL + '/calendar?eventDate='+ 
+    return this.httpClient.get<Scheduler[]>(this.apiURL + '/calendar?eventDate='+
       eventDate.toISOString().split('T')[0] + "&name=" + name + "&limit=20&skip=" + page)
     .pipe(
       catchError(this.errorHandler)
@@ -36,13 +36,13 @@ export class SchedulerService {
 
   create(scheduler: Scheduler): Observable<Scheduler> {
     if (scheduler.eventDate == null) { scheduler.eventDate = new Date("1900-01-01")}
-    
+
     return this.httpClient.post<Scheduler>(this.apiURL + '/calendar', JSON.stringify(scheduler), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
   }
-    
+
   update(id: number, scheduler: Scheduler): Observable<Scheduler> {
     return this.httpClient.put<Scheduler>(this.apiURL + '/calendar/' + id, JSON.stringify(scheduler), this.httpOptions)
     .pipe(

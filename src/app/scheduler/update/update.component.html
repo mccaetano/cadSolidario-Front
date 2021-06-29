@@ -9,14 +9,13 @@
     <div class="col">
       <div class="submit-form bg-light p-5 rounded">
         <div class="form-group">
-          <label for="eventDate">Data do Entrega:</label>
-          <input id="eventDate"  type="text"
-           placeholder="EventDate"
-           class="form-control"
-           bsDatepicker
-           [(ngModel)]="scheduler.eventDate">
+          <label for="status">Status:</label>
+          <select id="status" class="form-control" [(ngModel)]="statusCurrent">
+            <option disabled>Status</option>
+           <option *ngFor="let status of statusList" value="{{status.id}}">{{status.description}}</option>
+          </select>
         </div>
-        <button class="btn btn-primary" (click)="create()">criar</button>
+        <button class="btn btn-primary" (click)="setStatus()">Buscar</button>
       </div>
     </div>
   </div>
