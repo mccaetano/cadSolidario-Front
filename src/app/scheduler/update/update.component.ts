@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Scheduler } from '../scheduler';
 import { SchedulerService } from '../scheduler.service';
@@ -12,9 +12,9 @@ import { StatusList } from '../statusList';
 })
 export class UpdateComponent implements OnInit {
 
-  statusCurrent?='';
+  statusCurrent: number = 0;
   statusList: StatusList[] = [];
-  scheduler: Scheduler;
+  @Input() id: number =0;
 
   constructor(private modalRef: BsModalRef,
     private statusListService: StatusListService,
@@ -24,7 +24,6 @@ export class UpdateComponent implements OnInit {
           this.statusList = data;
         }
       );
-      this.scheduler = {};
      }
 
   ngOnInit(): void {
@@ -36,7 +35,13 @@ export class UpdateComponent implements OnInit {
   }
 
   setStatus() {
-    this.scehdulerService.create(this.scheduler).subscribe();
+    var scheduler: Scheduler = {
+      status: {
+        id: Number(this.statusCurrent)
+      }
+    };
+    console.log('setStatus: '+ JSON.stringify(scheduler))
+    this.scehdulerService.update(this.id, scheduler).subscribe();
     this.close();
   }
 }

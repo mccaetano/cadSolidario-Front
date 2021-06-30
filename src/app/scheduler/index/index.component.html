@@ -52,7 +52,7 @@
           <td>{{ scheduler.milks }}</td>
           <td>{{ scheduler.status?.description }}</td>
           <td>
-            <button  class="btn btn-primary" (click)="openModalUpdate()">Status</button>
+            <button  class="btn btn-primary" (click)="openModalUpdate(scheduler.id)">Status</button>
           </td>
         </tr>
       </tbody>

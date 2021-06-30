@@ -43,7 +43,8 @@ export class SchedulerService {
     )
   }
 
-  update(id: number, scheduler: Scheduler): Observable<Scheduler> {
+  update(id?: number, scheduler?: Scheduler): Observable<Scheduler> {
+    console.log('update: ' + JSON.stringify(scheduler));
     return this.httpClient.put<Scheduler>(this.apiURL + '/calendar/' + id, JSON.stringify(scheduler), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)

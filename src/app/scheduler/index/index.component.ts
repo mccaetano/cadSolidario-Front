@@ -1,10 +1,11 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Scheduler } from '../scheduler';
 import { SchedulerService } from '../scheduler.service';
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { CreateComponent } from '../create/create.component';
 import { UpdateComponent } from '../update/update.component';
+import { combineLatest, Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,13 +20,19 @@ export class IndexComponent implements OnInit {
   schedulers: Scheduler[] = [];
   eventDates: Scheduler[] = [];
   modalRef?: BsModalRef
+  subscriptions: Subscription[] = [];
+  messages: string[] = [];
 
   constructor(
     public schedulerService: SchedulerService,
     private route: ActivatedRoute,
-    public modalService: BsModalService) {  }
+    public modalService: BsModalService,
+    private changeDetectorRef: ChangeDetectorRef) {  }
 
   ngOnInit(): void {
+    this.getEventDates();
+  }
+  getEventDates(): void {
     this.schedulerService.getEventDates().subscribe((data: Scheduler[]) => {
       this.eventDates = data;
       if (data.length > 0) {
@@ -73,11 +80,56 @@ export class IndexComponent implements OnInit {
     const initialState = {
     };
     this.modalRef = this.modalService.show(CreateComponent, initialState);
+    const _combine = combineLatest(
+      this.modalRef.onHide,
+      this.modalRef.onHidden
+    ).subscribe(() => this.changeDetectorRef.markForCheck());
+
+    this.subscriptions.push(
+      this.modalRef.onHide.subscribe(() => {
+        })
+    );
+    this.subscriptions.push(
+      this.modalRef.onHidden.subscribe(() => {
+        this.getEventDates();
+        this.unsubscribe();
+      })
+    );
+
+    this.subscriptions.push(_combine);
   }
 
-  openModalUpdate() {
+  openModalUpdate(id?: number) {
     const initialState = {
+      id: id
     };
-    this.modalRef = this.modalService.show(UpdateComponent, initialState);
+    console.log("input: " + JSON.stringify( initialState));
+    this.modalRef = this.modalService.show(UpdateComponent, {initialState});
+    this.modalRef.onHide.pipe()
+    const _combine = combineLatest(
+      this.modalRef.onHide,
+      this.modalRef.onHidden
+    ).subscribe(() => this.changeDetectorRef.markForCheck());
+
+    this.subscriptions.push(
+      this.modalRef.onHide.subscribe(() => {
+        })
+    );
+    this.subscriptions.push(
+      this.modalRef.onHidden.subscribe(() => {
+        this.getByFilter();
+        this.unsubscribe();
+      })
+    );
+
+    this.subscriptions.push(_combine);
+
+  }
+
+  unsubscribe() {
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+    this.subscriptions = [];
   }
 }

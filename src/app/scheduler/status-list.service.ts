@@ -20,7 +20,7 @@ export class StatusListService {
   constructor(private httpClient: HttpClient) { }
 
   getAll(): Observable<StatusList[]> {
-    return this.httpClient.get<StatusList[]>(this.apiURL + '/calendar/status')
+    return this.httpClient.get<StatusList[]>(this.apiURL + '/status')
     .pipe(
       catchError(this.errorHandler)
     )
