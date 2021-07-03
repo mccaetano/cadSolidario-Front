@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecipientModule } from './recipient/recipient.module';
 import { SchedulerModule } from "./scheduler/scheduler.module";
+import { allIcons, NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SchedulerModule } from "./scheduler/scheduler.module";
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxBootstrapIconsModule.pick(allIcons)
   ],
   providers: [],
   bootstrap: [AppComponent]

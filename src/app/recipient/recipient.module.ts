@@ -5,6 +5,8 @@ import { RecipientRoutingModule } from './recipient-routing.module';
 import { ViewComponent } from './view/view.component';
 import { CreateComponent } from './create/create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { allIcons, NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RecipientRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
+    NgxBootstrapIconsModule.pick(allIcons)
   ]
 })
 export class RecipientModule { }
