@@ -22,7 +22,7 @@ export class ViewComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: [''],
       name: [''],
-      birthDate: [''],
+      birthDate: [new Date()],
       work: [''],
       phone: [''],
       celPhone: [''],
@@ -67,7 +67,7 @@ export class ViewComponent implements OnInit {
         var value: any = {
           id: data.id ?? 0,
           name: data.name ?? "",
-          birthDate: Date.parse((data.birthDate ?? "1900-01-01") + "T00:00:00Z"),
+          birthDate: new Date(data?.birthDate ?? '1900-01-01'),
           work: data.work ?? "",
           phone: data.contacts?.phone ?? "",
           celPhone: data.contacts?.celPhone ?? "",

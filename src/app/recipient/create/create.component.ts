@@ -20,7 +20,7 @@ export class CreateComponent implements OnInit {
     private recipientService: RecipientService) {
     this.form = this.formBuilder.group({
       name: [''],
-      birthDate: [''],
+      birthDate: [new Date()],
       work: [''],
       phone: [''],
       celPhone: [''],
